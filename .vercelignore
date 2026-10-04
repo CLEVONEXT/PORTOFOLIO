@@ -1,0 +1,10 @@
+node_modules
+.next
+.git
+electron-dist
+release
+android
+ios
+.env
+.env.local
+*.log

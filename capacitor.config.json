@@ -1,0 +1,35 @@
+{
+  "appId": "dev.clevonext.portfolio",
+  "appName": "Clevonext.Dev",
+  "webDir": "public",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://clevonext.dev",
+    "cleartext": false,
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#050506",
+    "buildOptions": {
+      "keystorePath": "release.keystore",
+      "keystoreAlias": "clevonext"
+    }
+  },
+  "ios": {
+    "backgroundColor": "#050506",
+    "contentInset": "always"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "backgroundColor": "#050506",
+      "showSpinner": false,
+      "launchAutoHide": true,
+      "launchShowDuration": 1800
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#050506"
+    }
+  }
+}

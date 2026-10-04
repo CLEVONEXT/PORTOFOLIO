@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════════
+   Clevonext.Dev — Design tokens
+   Editorial / minimalist / elegant, dark-first.
+   ══════════════════════════════════════════════════ */
+@layer base {
+  :root {
+    --background: 240 6% 4%;
+    --foreground: 40 12% 94%;
+
+    --card: 240 6% 7%;
+    --card-foreground: 40 12% 94%;
+
+    --popover: 240 8% 6%;
+    --popover-foreground: 40 12% 94%;
+
+    --primary: 40 12% 94%;
+    --primary-foreground: 240 8% 6%;
+
+    --secondary: 240 5% 13%;
+    --secondary-foreground: 40 12% 94%;
+
+    --muted: 240 5% 14%;
+    --muted-foreground: 40 6% 62%;
+
+    --accent: 16 100% 62%;
+    --accent-foreground: 240 8% 6%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 40 8% 18%;
+    --input: 240 5% 16%;
+    --ring: 16 100% 62%;
+
+    --radius: 0.875rem;
+
+    /* Glass tokens */
+    --glass-bg: 255 255 255 / 0.045;
+    --glass-border: 255 255 255 / 0.09;
+    --glass-highlight: 255 255 255 / 0.14;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: hsl(var(--accent) / 0.28);
+    color: hsl(var(--foreground));
+  }
+
+  /* Editorial scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+    border: 3px solid hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.6);
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   Utilities
+   ══════════════════════════════════════════════════ */
+@layer utilities {
+  /* ── Glassmorphism ─────────────────────────────────────────────────────── */
+  .glass {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.028) 45%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow:
+      0 8px 32px 0 rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-strong {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.04) 50%,
+      rgba(255, 255, 255, 0.07) 100%
+    );
+    backdrop-filter: blur(34px) saturate(170%);
+    -webkit-backdrop-filter: blur(34px) saturate(170%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 16px 48px 0 rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-subtle {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Glow ring used on interactive glass surfaces */
+  .glass-glow {
+    position: relative;
+  }
+  .glass-glow::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 106, 61, 0.55),
+      rgba(124, 156, 255, 0.45),
+      rgba(255, 255, 255, 0.05)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .glass-glow:hover::after {
+    opacity: 1;
+  }
+
+  /* ── Typography ───────────────────────────────────────────────────────── */
+  .editorial-title {
+    @apply font-display tracking-[-0.03em] leading-[0.95];
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .eyebrow {
+    @apply text-[0.68rem] uppercase tracking-[0.32em] text-muted-foreground;
+  }
+
+  .hairline {
+    @apply border-t border-white/[0.07];
+  }
+
+  /* ── Backgrounds ──────────────────────────────────────────────────────── */
+  .aurora-bg {
+    position: absolute;
+    inset: -30%;
+    background:
+      radial-gradient(
+        38% 42% at 22% 26%,
+        rgba(255, 106, 61, 0.22) 0%,
+        transparent 62%
+      ),
+      radial-gradient(
+        34% 40% at 78% 22%,
+        rgba(124, 156, 255, 0.18) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        46% 46% at 52% 82%,
+        rgba(160, 120, 255, 0.14) 0%,
+        transparent 64%
+      );
+    filter: blur(72px);
+    pointer-events: none;
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.035) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.035) 1px,
+        transparent 1px
+      );
+    background-size: 64px 64px;
+  }
+
+  .noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.035;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  /* ── Effects ──────────────────────────────────────────────────────────── */
+  .shimmer-line {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer-line::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.16),
+      transparent
+    );
+    animation: shimmer 2.4s infinite;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   Reduced motion
+   ══════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

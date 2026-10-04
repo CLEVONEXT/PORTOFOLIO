@@ -1,0 +1,39 @@
+{
+  "name": "Clevonext.Dev — Portfolio of Moh. Arsyil Afif Mdani",
+  "short_name": "Clevonext.Dev",
+  "description": "Editorial portfolio of a software engineering student. Minimalist, elegant, dark mode.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#050506",
+  "theme_color": "#050506",
+  "categories": ["portfolio", "developer", "education"],
+  "lang": "id",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Projects", "url": "/#projects" },
+    { "name": "Certificates", "url": "/#certificates" },
+    { "name": "Contact", "url": "/#contact" }
+  ]
+}

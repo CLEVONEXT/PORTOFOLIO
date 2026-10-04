@@ -1,0 +1,236 @@
+// Clevonext.Dev — Prisma schema (Vercel Postgres / Supabase compatible)
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─────────────────────────────────────────────────────────────
+// AUTH / ADMIN
+// ─────────────────────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  passwordHash  String?
+  role          Role      @default(ADMIN)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ─────────────────────────────────────────────────────────────
+// PORTFOLIO CONTENT
+// ─────────────────────────────────────────────────────────────
+
+enum ProjectStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  title       String
+  summary     String?
+  description String?
+  coverImage  String?
+  gallery     String[]      @default([])
+  techStack   String[]      @default([])
+  demoUrl     String?
+  repoUrl     String?
+  category    String?
+  year        Int?
+  featured    Boolean       @default(false)
+  status      ProjectStatus @default(PUBLISHED)
+  sortOrder   Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status, sortOrder])
+  @@map("projects")
+}
+
+enum CertificateSource {
+  UPLOAD
+  EXTERNAL_URL
+}
+
+model Certificate {
+  id           String            @id @default(cuid())
+  title        String
+  issuer       String
+  issuedAt     DateTime?
+  expiresAt    DateTime?
+  credentialId String?
+  verifyUrl    String?
+  // "UPLOAD" → file stored in Blob/local; "EXTERNAL_URL" → verifyUrl is the source
+  source       CertificateSource @default(UPLOAD)
+  fileUrl      String?
+  // Required when source = EXTERNAL_URL (Credly / Coursera / Dicoding logo etc.)
+  thumbnailUrl String?
+  issuerLogo   String?
+  skills       String[]          @default([])
+  featured     Boolean           @default(false)
+  sortOrder    Int               @default(0)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([sortOrder])
+  @@map("certificates")
+}
+
+enum ExperienceType {
+  EDUCATION
+  COLLEGE
+  ORGANIZATION
+  WORK
+  ACHIEVEMENT
+}
+
+model Experience {
+  id          String         @id @default(cuid())
+  title       String
+  organization String
+  type        ExperienceType @default(EDUCATION)
+  location    String?
+  description String?
+  startDate   DateTime
+  endDate     DateTime?
+  isCurrent   Boolean        @default(false)
+  logoUrl     String?
+  tags        String[]       @default([])
+  sortOrder   Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@index([type, sortOrder])
+  @@map("experiences")
+}
+
+enum SkillCategory {
+  FRONTEND
+  BACKEND
+  TOOLS
+  CLOUD
+  DESIGN
+  OTHER
+}
+
+model Skill {
+  id        String        @id @default(cuid())
+  name      String
+  category  SkillCategory @default(FRONTEND)
+  level     Int           @default(70) // 0 - 100
+  iconUrl   String?
+  colorHex  String?
+  sortOrder Int           @default(0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([category, sortOrder])
+  @@map("skills")
+}
+
+model Song {
+  id           String   @id @default(cuid())
+  title        String
+  artist       String
+  album        String?
+  coverArt     String?
+  // Either a direct audio file (mp3/ogg) or a Spotify embed/track URL
+  audioUrl     String?
+  spotifyUrl   String?
+  spotifyEmbed String?
+  durationSec  Int?
+  mood         String?
+  isFavorite   Boolean  @default(true)
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([sortOrder])
+  @@map("songs")
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  body      String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("messages")
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}

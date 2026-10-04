@@ -1,0 +1,2 @@
+# Local uploads are served from this folder when Vercel Blob is not configured.
+# Files placed here are gitignored; keep the folder itself in version control.
