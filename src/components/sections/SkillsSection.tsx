@@ -28,7 +28,8 @@ export function SkillsSection({ skills }: { skills: SkillView[] }) {
     [skills, activeCategory],
   );
 
-  if (!skills.length) return null;
+  // Always render so the navbar anchor (id="skills") always exists.
+  const empty = skills.length === 0;
 
   return (
     <section id="skills" className="relative scroll-mt-24 py-20 sm:py-28">
@@ -36,7 +37,7 @@ export function SkillsSection({ skills }: { skills: SkillView[] }) {
         <div>
           <span className="eyebrow">03 — Skills</span>
           <h2 className="editorial-title mt-3 text-4xl font-light sm:text-5xl">
-            Programming <span className="italic text-ember">Skills</span>
+            Programming <span className="italic text-[rgb(var(--ink))]">Skills</span>
           </h2>
         </div>
         <p className="max-w-sm text-sm text-muted-foreground">
@@ -46,6 +47,17 @@ export function SkillsSection({ skills }: { skills: SkillView[] }) {
       </header>
 
       {/* Category filter */}
+      {empty ? (
+        <div className="mt-10 grid place-items-center rounded-3xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-14 text-center">
+          <div>
+            <p className="text-sm text-[rgb(var(--ink-dim))]">Belum ada keahlian yang ditampilkan.</p>
+            <p className="mt-1 text-xs text-[rgb(var(--ink-mute))]">
+              Keahlian akan muncul di sini setelah ditambahkan lewat dashboard admin.
+            </p>
+          </div>
+        </div>
+      ) : (
+      <>
       <div className="mt-10 flex flex-wrap gap-2">
         {categories.map((category) => (
           <button
@@ -55,8 +67,8 @@ export function SkillsSection({ skills }: { skills: SkillView[] }) {
             className={cn(
               "rounded-full border px-4 py-2 text-xs transition-all duration-300",
               activeCategory === category
-                ? "border-ember/50 bg-ember/12 text-ember-soft"
-                : "border-white/10 bg-white/[0.03] text-muted-foreground hover:border-white/20 hover:text-foreground",
+                ? "border-[rgb(var(--line-strong))] bg-[rgb(var(--cta))] text-[rgb(var(--cta-fg))]"
+                : "border-[rgb(var(--line))] bg-[rgb(var(--surface))] text-[rgb(var(--ink-dim))] hover:border-[rgb(var(--line-strong))] hover:text-[rgb(var(--ink))]",
             )}
           >
             {category === "ALL" ? "Semua" : SKILL_CATEGORY_LABELS[category] ?? category}
@@ -81,19 +93,13 @@ export function SkillsSection({ skills }: { skills: SkillView[] }) {
               </span>
             </div>
 
-            <div className="relative mt-3 h-[3px] w-full overflow-hidden rounded-full bg-white/[0.07]">
+            <div className="relative mt-3 h-[3px] w-full overflow-hidden rounded-full bg-[rgb(var(--line))]">
               <motion.div
                 initial={{ width: 0 }}
                 whileInView={{ width: `${skill.level}%` }}
                 viewport={{ once: true, amount: 0.6 }}
                 transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                className="h-full rounded-full"
-                style={{
-                  background: skill.colorHex
-                    ? `linear-gradient(90deg, ${skill.colorHex}, ${skill.colorHex}aa)`
-                    : "linear-gradient(90deg, #ff6a3d, #ff8a63)",
-                  boxShadow: `0 0 14px -2px ${skill.colorHex ?? "#ff6a3d"}99`,
-                }}
+                className="h-full rounded-full bg-[rgb(var(--cta))]"
               />
             </div>
 
@@ -103,6 +109,8 @@ export function SkillsSection({ skills }: { skills: SkillView[] }) {
           </motion.div>
         ))}
       </div>
+      </>
+      )}
     </section>
   );
 }

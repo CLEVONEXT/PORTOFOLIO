@@ -49,21 +49,24 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Editorial accent palette (Clevonext.Dev)
+        // Matte black & monochrome palette requested by user
         ink: {
-          950: "#050506",
-          900: "#0a0a0c",
-          800: "#111114",
-          700: "#17171b",
+          950: "#121212",
+          900: "#181818",
+          800: "#1E1E1E",
+          700: "#262626",
+          600: "#333333",
         },
-        ember: {
-          DEFAULT: "#ff6a3d",
-          soft: "#ff8a63",
-          deep: "#e04e22",
+        surface: {
+          DEFAULT: "#1E1E1E",
+          card: "#1E1E1E",
+          hover: "#262626",
+          border: "#2E2E2E",
         },
-        glow: {
-          DEFAULT: "#7c9cff",
-          soft: "#a5b8ff",
+        text: {
+          primary: "#FFFFFF",
+          secondary: "#E0E0E0",
+          muted: "#9E9E9E",
         },
       },
       borderRadius: {
@@ -78,10 +81,8 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.55)",
-        "glass-inset": "inset 0 1px 0 0 rgba(255,255,255,0.08)",
-        glow: "0 0 42px -8px rgba(124, 156, 255, 0.55)",
-        ember: "0 0 42px -10px rgba(255, 106, 61, 0.6)",
+        card: "0 4px 20px -2px rgba(0, 0, 0, 0.5)",
+        cta: "0 0 24px -4px rgba(255, 255, 255, 0.25)",
       },
       backgroundImage: {
         grain:

@@ -1,21 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import { SITE } from "@/lib/constants";
 import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
+import { ThemeProvider } from "@/components/layout/ThemeToggle";
 import "./globals.css";
 
 const sans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
-});
-
-const display = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-display",
-  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const mono = JetBrains_Mono({
@@ -67,7 +62,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050506",
+  themeColor: "#121212",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -77,20 +72,29 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  // Applies the saved theme before first paint to avoid a flash.
+  const themeScript = `
+    (function(){try{var t=localStorage.getItem('clevonext:theme');if(t==='light'){document.documentElement.classList.add('light');}}catch(e){}})();
+  `;
+
   return (
     <html lang="id" className="dark" suppressHydrationWarning>
-      <body className={`${sans.variable} ${display.variable} ${mono.variable} font-sans`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className={`${sans.variable} ${mono.variable} font-sans`}>
+        <ThemeProvider>
         {children}
+        </ThemeProvider>
         <ServiceWorkerRegistrar />
         <Toaster
           position="top-right"
           theme="dark"
           toastOptions={{
             style: {
-              background: "rgba(17,17,20,0.85)",
-              border: "1px solid rgba(255,255,255,0.09)",
-              backdropFilter: "blur(18px)",
-              color: "#f2efe9",
+              background: "#1E1E1E",
+              border: "1px solid #333333",
+              color: "#E0E0E0",
             },
           }}
         />

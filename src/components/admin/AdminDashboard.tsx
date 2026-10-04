@@ -115,15 +115,15 @@ export function AdminDashboard({
               <motion.span
                 layoutId="admin-nav-pill"
                 transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                className="absolute inset-0 rounded-xl border border-white/10 bg-white/[0.07]"
+                className="absolute inset-0 rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))]"
               />
             ) : null}
 
-            <Icon className={cn("relative z-10 size-4", isActive && "text-ember")} />
+            <Icon className={cn("relative z-10 size-4", isActive && "text-[rgb(var(--ink))]")} />
             <span className="relative z-10 font-medium">{item.label}</span>
 
             {item.id === "messages" && unread ? (
-              <span className="relative z-10 ml-auto grid size-5 place-items-center rounded-full bg-ember text-[0.62rem] font-semibold text-ink-950">
+              <span className="relative z-10 ml-auto grid size-5 place-items-center rounded-full bg-[rgb(var(--cta))] text-[0.62rem] font-semibold text-[rgb(var(--cta-fg))]">
                 {unread}
               </span>
             ) : null}
@@ -134,12 +134,11 @@ export function AdminDashboard({
   );
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-ink-950">
+    <div className="relative min-h-screen w-full overflow-hidden bg-[rgb(var(--bg))]">
       {/* Ambient glassmorphism backdrop */}
-      <div className="pointer-events-none fixed inset-0">
-        <div className="aurora-bg animate-aurora" />
-        <div className="absolute inset-0 grid-lines opacity-[0.22]" />
-      </div>
+        <div className="pointer-events-none fixed inset-0">
+          <div className="absolute inset-0 grid-lines opacity-[0.22]" />
+        </div>
 
       <div className="relative flex min-h-screen">
         {/* ── Desktop sidebar ──────────────────────────────────────────── */}
@@ -147,7 +146,7 @@ export function AdminDashboard({
           <div className="flex flex-col gap-9">
             <div className="flex flex-col gap-1 px-1">
               <span className="editorial-title text-lg font-light">
-                Clevonext<span className="text-ember">.Dev</span>
+                Clevonext<span className="text-[rgb(var(--ink-mute))]">.Dev</span>
               </span>
               <span className="eyebrow text-[0.55rem]">Admin Console</span>
             </div>
@@ -157,7 +156,7 @@ export function AdminDashboard({
 
           <div className="flex flex-col gap-4">
             <div className="glass-subtle flex items-center gap-3 rounded-2xl p-3">
-              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-ember to-ember-deep text-xs font-semibold text-ink-950">
+              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-[rgb(var(--cta))] text-xs font-semibold text-[rgb(var(--cta-fg))]">
                 {(user.name ?? user.email ?? "A").slice(0, 2).toUpperCase()}
               </span>
               <div className="min-w-0">
@@ -187,7 +186,7 @@ export function AdminDashboard({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSidebarOpen(false)}
-                className="fixed inset-0 z-40 bg-ink-950/75 backdrop-blur-sm lg:hidden"
+                className="fixed inset-0 z-40 bg-[rgb(var(--bg))]/90 lg:hidden"
               />
               <motion.aside
                 initial={{ x: "-100%" }}
@@ -200,7 +199,7 @@ export function AdminDashboard({
                   <div className="flex items-start justify-between">
                     <div className="flex flex-col gap-1">
                       <span className="editorial-title text-lg font-light">
-                        Clevonext<span className="text-ember">.Dev</span>
+                        Clevonext<span className="text-[rgb(var(--ink-mute))]">.Dev</span>
                       </span>
                       <span className="eyebrow text-[0.55rem]">Admin Console</span>
                     </div>
@@ -208,7 +207,7 @@ export function AdminDashboard({
                       type="button"
                       onClick={() => setSidebarOpen(false)}
                       aria-label="Tutup menu"
-                      className="rounded-lg border border-white/10 bg-white/[0.05] p-2"
+                      className="rounded-lg border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-2"
                     >
                       <X className="size-4" />
                     </button>
@@ -238,7 +237,7 @@ export function AdminDashboard({
               type="button"
               onClick={() => setSidebarOpen(true)}
               aria-label="Buka menu"
-              className="rounded-lg border border-white/10 bg-white/[0.05] p-2 lg:hidden"
+              className="rounded-lg border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-2 lg:hidden"
             >
               <Menu className="size-4" />
             </button>
@@ -254,7 +253,7 @@ export function AdminDashboard({
 
             <div className="ml-auto flex items-center gap-3">
               <Badge tone="accent" className="hidden sm:inline-flex">
-                <span className="size-1.5 rounded-full bg-ember" />
+                <span className="size-1.5 rounded-full bg-[rgb(var(--cta))]" />
                 Live Database
               </Badge>
 
@@ -262,15 +261,15 @@ export function AdminDashboard({
                 type="button"
                 onClick={() => setSection("messages")}
                 aria-label="Pesan"
-                className="relative grid size-9 place-items-center rounded-xl border border-white/10 bg-white/[0.05] text-muted-foreground transition-colors hover:text-foreground"
+                className="relative grid size-9 place-items-center rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] text-muted-foreground transition-colors hover:text-foreground"
               >
                 <Bell className="size-4" />
                 {unread ? (
-                  <span className="absolute -right-0.5 -top-0.5 size-2.5 rounded-full bg-ember" />
+                  <span className="absolute -right-0.5 -top-0.5 size-2.5 rounded-full bg-[rgb(var(--cta))]" />
                 ) : null}
               </button>
 
-              <span className="hidden size-9 place-items-center rounded-xl bg-gradient-to-br from-ember to-ember-deep text-[0.7rem] font-semibold text-ink-950 sm:grid">
+              <span className="hidden size-9 place-items-center rounded-xl bg-[rgb(var(--cta))] text-[0.7rem] font-semibold text-[rgb(var(--cta-fg))] sm:grid">
                 {(user.name ?? user.email ?? "A").slice(0, 2).toUpperCase()}
               </span>
             </div>

@@ -14,23 +14,21 @@ export default async function AdminLoginPage() {
   if (session?.user) redirect("/admin");
 
   return (
-    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-ink-950 px-5 py-16">
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[rgb(var(--bg))] px-5 py-16">
       <div className="pointer-events-none absolute inset-0">
-        <div className="aurora-bg animate-aurora" />
         <div className="absolute inset-0 grid-lines opacity-25" />
       </div>
 
-      <div className="glass-strong relative w-full max-w-md overflow-hidden rounded-3xl p-8 sm:p-10">
-        <div className="pointer-events-none absolute -right-20 -top-20 size-56 rounded-full bg-ember/15 blur-3xl" />
+      <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-8 sm:p-10">
 
         <div className="relative flex flex-col items-center gap-3 text-center">
-          <span className="grid size-12 place-items-center rounded-2xl border border-white/12 bg-white/[0.06]">
-            <Lock className="size-5 text-ember" />
+          <span className="grid size-12 place-items-center rounded-2xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))]">
+            <Lock className="size-5 text-[rgb(var(--ink))]" />
           </span>
           <div>
             <span className="eyebrow text-[0.58rem]">Restricted Area</span>
             <h1 className="editorial-title mt-2 text-2xl font-light">
-              Clevonext<span className="text-ember">.Dev</span> Admin
+              Clevonext<span className="text-[rgb(var(--ink-mute))]">.Dev</span> Admin
             </h1>
             <p className="mt-1.5 text-xs text-muted-foreground">
               Masuk dengan kredensial yang terdaftar di database.

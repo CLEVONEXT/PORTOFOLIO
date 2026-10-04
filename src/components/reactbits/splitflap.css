@@ -1,0 +1,50 @@
+/* SplitFlapText styles — solid tiles, no gradients */
+
+.sft {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.sft-tile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.28em;
+  height: 1.62em;
+  background: var(--sft-bg, #1e293b);
+  color: var(--sft-fg, #38bdf8);
+  border-radius: var(--sft-radius, 8px);
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+.sft-hinge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.sft-char {
+  display: inline-block;
+  transform-origin: 50% 50%;
+  animation: sft-flip var(--sft-flip, 0.1s) ease-out;
+}
+
+@keyframes sft-flip {
+  0% {
+    transform: rotateX(-88deg);
+    opacity: 0.25;
+  }
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}

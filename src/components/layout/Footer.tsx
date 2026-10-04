@@ -56,13 +56,12 @@ function SecretLoginModal({
 
   return (
     <Modal open={open} onOpenChange={onOpenChange} label="Secret admin login" className="max-w-md">
-      <div className="relative overflow-hidden p-8">
-        <div className="pointer-events-none absolute -right-20 -top-20 size-56 rounded-full bg-ember/15 blur-3xl" />
+    <div className="relative overflow-hidden p-8">
 
-        <div className="relative flex flex-col items-center gap-3 text-center">
-          <span className="grid size-12 place-items-center rounded-2xl border border-white/12 bg-white/[0.06]">
-            <Lock className="size-5 text-ember" />
-          </span>
+      <div className="relative flex flex-col items-center gap-3 text-center">
+        <span className="grid size-12 place-items-center rounded-2xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))]">
+          <Lock className="size-5 text-[rgb(var(--ink))]" />
+        </span>
           <div>
             <h3 className="editorial-title text-2xl font-light">Secret Access</h3>
             <p className="mt-1 text-xs text-muted-foreground">
@@ -143,17 +142,14 @@ export function Footer({ settings }: { settings: Record<string, string> }) {
 
   return (
     <footer id="contact" className="relative scroll-mt-24 pt-20">
-      <div className="glass-strong noise relative overflow-hidden rounded-3xl p-7 sm:p-10">
-        <div className="pointer-events-none absolute -left-24 top-0 size-72 rounded-full bg-glow/10 blur-3xl" />
-        <div className="pointer-events-none absolute -right-24 bottom-0 size-72 rounded-full bg-ember/10 blur-3xl" />
-
+        <div className="relative overflow-hidden rounded-3xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-7 sm:p-10">
         <div className="relative grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left: contact info */}
           <div className="flex flex-col justify-between gap-10">
             <div>
               <span className="eyebrow">05 — Contact</span>
               <h2 className="editorial-title mt-3 text-4xl font-light sm:text-5xl">
-                Mari <span className="italic text-ember">berkolaborasi</span>
+                Mari <span className="italic text-[rgb(var(--ink))]">berkolaborasi</span>
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
                 Punya proyek, kolaborasi, atau sekadar ingin menyapa? Kirim pesan
@@ -164,9 +160,9 @@ export function Footer({ settings }: { settings: Record<string, string> }) {
             <div className="space-y-6">
               <a
                 href={`mailto:${email}`}
-                className="group inline-flex items-center gap-3 text-sm text-foreground/90 transition-colors hover:text-ember"
+                className="group inline-flex items-center gap-3 text-sm text-[rgb(var(--ink-dim))] transition-colors hover:text-[rgb(var(--ink))]"
               >
-                <span className="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/[0.05]">
+                <span className="grid size-10 place-items-center rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))]">
                   <Mail className="size-4" />
                 </span>
                 {email}
@@ -184,7 +180,7 @@ export function Footer({ settings }: { settings: Record<string, string> }) {
                       <span
                         key={key}
                         aria-disabled
-                        className="inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-white/8 px-4 py-2 text-xs text-muted-foreground/50"
+                        className="inline-flex cursor-not-allowed items-center gap-2 rounded-full border border-[#2E2E2E] px-4 py-2 text-xs text-[rgb(var(--ink-mute))]/50"
                       >
                         <Icon className="size-3.5" />
                         {label}
@@ -195,7 +191,7 @@ export function Footer({ settings }: { settings: Record<string, string> }) {
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="glass-glow inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-2 text-xs text-foreground/85 transition-colors hover:text-foreground"
+                        className="inline-flex items-center gap-2 rounded-full border border-[rgb(var(--line))] bg-[rgb(var(--surface2))] px-4 py-2 text-xs text-[rgb(var(--ink-dim))] transition-colors hover:border-[rgb(var(--line-strong))] hover:text-[rgb(var(--ink))]"
                       >
                         <Icon className="size-3.5" />
                         {label}
@@ -258,7 +254,7 @@ export function Footer({ settings }: { settings: Record<string, string> }) {
         </div>
 
         {/* Copyright + secret trigger */}
-        <div className="relative mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/[0.07] pt-7 sm:flex-row">
+        <div className="relative mt-12 flex flex-col items-center justify-between gap-4 border-t border-[rgb(var(--line))] pt-7 sm:flex-row">
           <button
             type="button"
             onClick={handleSecretClick}
@@ -272,7 +268,7 @@ export function Footer({ settings }: { settings: Record<string, string> }) {
           <div className="flex items-center gap-4 text-[0.7rem] text-muted-foreground/60">
             <span>{SITE.owner}</span>
             <span className="hidden sm:inline">·</span>
-            <Link href="/admin" className="transition-colors hover:text-ember">
+            <Link href="/admin" className="transition-colors hover:text-[rgb(var(--ink))]">
               Dashboard
             </Link>
           </div>

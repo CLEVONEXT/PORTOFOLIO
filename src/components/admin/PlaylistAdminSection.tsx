@@ -178,9 +178,9 @@ export function PlaylistAdminSection({
             {remoteResults.map((track) => (
               <div
                 key={track.spotifyUrl ?? track.title}
-                className="flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] p-3"
+                className="flex items-center gap-3 rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-3"
               >
-                <div className="size-10 overflow-hidden rounded-lg border border-white/10 bg-white/[0.04]">
+                <div className="size-10 overflow-hidden rounded-lg border border-[rgb(var(--line))] bg-[rgb(var(--surface))]">
                   {track.coverArt ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={track.coverArt} alt={track.title} className="size-full object-cover" />
@@ -207,7 +207,7 @@ export function PlaylistAdminSection({
               {index + 1}
             </span>
 
-            <div className="size-11 overflow-hidden rounded-lg border border-white/10 bg-white/[0.04]">
+            <div className="size-11 overflow-hidden rounded-lg border border-[rgb(var(--line))] bg-[rgb(var(--surface))]">
               {song.coverArt ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={song.coverArt} alt={song.title} className="size-full object-cover" />
@@ -233,7 +233,7 @@ export function PlaylistAdminSection({
                 type="button"
                 onClick={() => move(index, -1)}
                 aria-label="Naikkan urutan"
-                className="grid size-7 place-items-center rounded-lg border border-white/10 text-muted-foreground transition-colors hover:text-foreground"
+                className="grid size-7 place-items-center rounded-lg border border-[rgb(var(--line))] text-muted-foreground transition-colors hover:text-foreground"
               >
                 ↑
               </button>
@@ -241,7 +241,7 @@ export function PlaylistAdminSection({
                 type="button"
                 onClick={() => move(index, 1)}
                 aria-label="Turunkan urutan"
-                className="grid size-7 place-items-center rounded-lg border border-white/10 text-muted-foreground transition-colors hover:text-foreground"
+                className="grid size-7 place-items-center rounded-lg border border-[rgb(var(--line))] text-muted-foreground transition-colors hover:text-foreground"
               >
                 ↓
               </button>
@@ -330,7 +330,7 @@ export function PlaylistAdminSection({
               />
             </Field>
 
-            <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+            <div className="flex items-center justify-between rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] px-4 py-3">
               <span className="text-sm">Tampilkan di playlist favorit</span>
               <Switch
                 checked={form.isFavorite}

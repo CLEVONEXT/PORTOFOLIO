@@ -49,15 +49,14 @@ export function StatCard({
 }) {
   return (
     <Panel className="relative overflow-hidden p-5">
-      <div className="pointer-events-none absolute -right-10 -top-10 size-28 rounded-full bg-ember/10 blur-2xl" />
       <div className="relative flex items-start justify-between">
         <div>
           <p className="eyebrow text-[0.58rem]">{label}</p>
           <p className="editorial-title mt-2 text-3xl font-light">{value}</p>
           {hint ? <p className="mt-1 text-[0.68rem] text-muted-foreground">{hint}</p> : null}
         </div>
-        <span className="grid size-10 place-items-center rounded-2xl border border-white/10 bg-white/[0.05]">
-          <Icon className="size-4 text-ember" />
+        <span className="grid size-10 place-items-center rounded-2xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))]">
+          <Icon className="size-4 text-[rgb(var(--ink))]" />
         </span>
       </div>
     </Panel>
@@ -77,7 +76,7 @@ export function RowActions({
         type="button"
         onClick={onEdit}
         aria-label="Edit"
-        className="grid size-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04] text-muted-foreground transition-colors hover:text-foreground"
+        className="grid size-8 place-items-center rounded-lg border border-[rgb(var(--line))] bg-[rgb(var(--surface))] text-muted-foreground transition-colors hover:text-foreground"
       >
         <Pencil className="size-3.5" />
       </button>

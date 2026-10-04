@@ -108,7 +108,7 @@ export function CertificatesAdminSection({
           const preview = certificate.thumbnailUrl || certificate.fileUrl;
           return (
             <Panel key={certificate.id} className="flex flex-col overflow-hidden">
-              <div className="relative aspect-[16/10] border-b border-white/[0.07] bg-white/[0.03]">
+              <div className="relative aspect-[16/10] border-b border-[rgb(var(--line))] bg-[rgb(var(--surface))]">
                 {preview ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={preview} alt={certificate.title} className="size-full object-cover" />
@@ -191,7 +191,7 @@ export function CertificatesAdminSection({
             </div>
 
             {/* Source switch: file upload vs external URL */}
-            <div className="flex rounded-xl border border-white/10 bg-white/[0.03] p-1">
+            <div className="flex rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-1">
               {[
                 { id: "UPLOAD", label: "Upload File", icon: UploadCloud },
                 { id: "EXTERNAL_URL", label: "Link Eksternal", icon: Link2 },
@@ -203,7 +203,7 @@ export function CertificatesAdminSection({
                   className={cn(
                     "flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2 text-xs transition-colors",
                     form.source === option.id
-                      ? "bg-white/[0.09] text-foreground"
+                      ? "bg-[rgb(var(--surface2))] text-foreground"
                       : "text-muted-foreground hover:text-foreground",
                   )}
                 >
@@ -250,7 +250,7 @@ export function CertificatesAdminSection({
               />
             </Field>
 
-            <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+            <div className="flex items-center justify-between rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] px-4 py-3">
               <span className="text-sm">Featured</span>
               <Switch
                 checked={form.featured}

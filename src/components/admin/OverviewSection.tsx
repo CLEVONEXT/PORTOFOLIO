@@ -61,9 +61,9 @@ export function OverviewSection({
               recent.map((message) => (
                 <div
                   key={message.id}
-                  className="flex items-center gap-4 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4"
+                  className="flex items-center gap-4 rounded-2xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-4"
                 >
-                  <span className="grid size-9 shrink-0 place-items-center rounded-full border border-white/10 bg-white/[0.05] text-xs uppercase">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-full border border-[rgb(var(--line))] bg-[rgb(var(--surface))] text-xs uppercase">
                     {message.name.slice(0, 2)}
                   </span>
                   <div className="min-w-0 flex-1">
@@ -85,9 +85,8 @@ export function OverviewSection({
 
         <div className="space-y-6">
           <Panel className="relative overflow-hidden p-6">
-            <div className="pointer-events-none absolute -right-16 -top-16 size-44 rounded-full bg-glow/12 blur-3xl" />
             <div className="relative">
-              <Sparkles className="size-5 text-ember" />
+              <Sparkles className="size-5 text-[rgb(var(--ink))]" />
               <h3 className="editorial-title mt-4 text-xl font-light">Quick Actions</h3>
               <p className="mt-1 text-xs text-muted-foreground">
                 Tambah konten baru langsung dari sini.
@@ -114,9 +113,9 @@ export function OverviewSection({
                 return (
                   <div key={key} className="flex items-center gap-3">
                     <span className="w-20 text-[0.7rem] text-muted-foreground">{label}</span>
-                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+                    <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[rgb(var(--surface))]">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-ember to-ember-soft"
+                        className="h-full rounded-full bg-[rgb(var(--cta))]"
                         style={{ width: `${Math.min(100, count * 25 + 8)}%` }}
                       />
                     </div>

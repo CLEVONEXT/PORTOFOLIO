@@ -67,14 +67,14 @@ export function Switch({
       className={cn(
         "relative inline-flex h-6 w-11 shrink-0 items-center rounded-full border transition-colors duration-300 disabled:opacity-50",
         checked
-          ? "border-ember/60 bg-ember/85 shadow-[0_0_20px_-6px_rgba(255,106,61,0.9)]"
-          : "border-white/12 bg-white/[0.06]",
+          ? "border-[rgb(var(--line-strong))] bg-[rgb(var(--cta))]"
+          : "border-[rgb(var(--line))] bg-[rgb(var(--surface2))]",
         className,
       )}
     >
       <span
         className={cn(
-          "pointer-events-none block size-4 rounded-full bg-white shadow transition-transform duration-300",
+          "pointer-events-none block size-4 rounded-full bg-[rgb(var(--cta))] shadow transition-transform duration-300",
           checked ? "translate-x-6" : "translate-x-1",
         )}
       />
@@ -92,10 +92,10 @@ export function Badge({
   tone?: "default" | "accent" | "glow" | "muted";
 }) {
   const tones = {
-    default: "border-white/12 bg-white/[0.06] text-foreground/85",
-    accent: "border-ember/40 bg-ember/12 text-ember-soft",
-    glow: "border-glow/40 bg-glow/12 text-glow-soft",
-    muted: "border-white/8 bg-white/[0.03] text-muted-foreground",
+    default: "border-[rgb(var(--line))] bg-[rgb(var(--surface2))] text-[rgb(var(--ink-dim))]",
+    accent: "border-[rgb(var(--line-strong))] bg-[rgb(var(--surface2))] text-[rgb(var(--ink))]",
+    glow: "border-[rgb(var(--line-strong))] bg-[rgb(var(--surface2))] text-[rgb(var(--ink-mute))]",
+    muted: "border-[#2E2E2E] bg-[rgb(var(--surface))] text-[rgb(var(--ink-mute))]",
   } as const;
 
   return (

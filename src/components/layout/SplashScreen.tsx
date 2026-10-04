@@ -50,24 +50,23 @@ export function SplashScreen({ force = false }: { force?: boolean }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-ink-950"
+          className="fixed inset-0 z-[200] flex items-center justify-center overflow-hidden bg-[rgb(var(--bg))]"
         >
-          {/* Ambient aurora */}
-          <div className="aurora-bg animate-aurora" />
-          <div className="absolute inset-0 grid-lines opacity-[0.35]" />
+          {/* Solid grid only — no gradient */}
+          <div className="absolute inset-0 grid-lines opacity-25" />
 
           {/* Curtains sliding away */}
           <motion.div
             initial={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
-            className="absolute inset-x-0 top-0 h-1/2 bg-ink-950"
+            className="absolute inset-x-0 top-0 h-1/2 bg-[rgb(var(--bg))]"
           />
           <motion.div
             initial={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
-            className="absolute inset-x-0 bottom-0 h-1/2 bg-ink-950"
+            className="absolute inset-x-0 bottom-0 h-1/2 bg-[rgb(var(--bg))]"
           />
 
           <div className="relative z-10 flex flex-col items-center gap-8 px-6">
@@ -85,7 +84,7 @@ export function SplashScreen({ force = false }: { force?: boolean }) {
                     delay: 0.12 + index * 0.055,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className={letter === "." ? "text-ember" : "text-foreground"}
+                  className={letter === "." ? "text-[rgb(var(--ink-mute))]" : "text-[rgb(var(--ink))]"}
                 >
                   {letter}
                 </motion.span>
@@ -96,7 +95,7 @@ export function SplashScreen({ force = false }: { force?: boolean }) {
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 1.1, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="h-px w-56 origin-left bg-gradient-to-r from-transparent via-white/40 to-transparent sm:w-80"
+              className="h-px w-56 origin-left bg-[rgb(var(--line-strong))] sm:w-80"
             />
 
             <motion.p
@@ -114,7 +113,7 @@ export function SplashScreen({ force = false }: { force?: boolean }) {
             initial={{ x: "-100%" }}
             animate={{ x: "100%" }}
             transition={{ duration: 1.4, delay: 0.3, ease: "easeInOut" }}
-            className="absolute bottom-0 left-0 h-px w-1/2 bg-gradient-to-r from-transparent via-ember to-transparent"
+            className="absolute bottom-0 left-0 h-px w-1/2 bg-[rgb(var(--ink-mute))]"
           />
         </motion.div>
       ) : null}

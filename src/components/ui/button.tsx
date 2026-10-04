@@ -9,17 +9,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-foreground text-background hover:bg-foreground/90 hover:shadow-[0_0_28px_-6px_rgba(255,255,255,0.35)]",
+          "bg-[rgb(var(--cta))] text-[rgb(var(--cta-fg))] hover:bg-[rgb(var(--surface2))]",
         accent:
-          "bg-ember text-ink-950 hover:bg-ember-soft shadow-[0_0_34px_-10px_rgba(255,106,61,0.75)]",
+          "bg-[rgb(var(--cta))] text-[rgb(var(--cta-fg))] hover:bg-[rgb(var(--ink-mute))]",
         glass:
-          "glass glass-glow text-foreground hover:text-white",
+          "border border-[rgb(var(--line))] bg-[rgb(var(--surface))] text-foreground hover:border-[rgb(var(--line-strong))] hover:text-[rgb(var(--ink))]",
         outline:
-          "border border-white/12 bg-transparent text-foreground hover:border-white/25 hover:bg-white/[0.04]",
-        ghost: "text-muted-foreground hover:bg-white/[0.05] hover:text-foreground",
+          "border border-[rgb(var(--line))] bg-transparent text-foreground hover:border-[rgb(var(--line))] hover:bg-[rgb(var(--surface))]",
+        ghost: "text-muted-foreground hover:bg-[rgb(var(--surface))] hover:text-foreground",
         destructive:
           "bg-destructive/90 text-destructive-foreground hover:bg-destructive",
-        link: "text-ember underline-offset-4 hover:underline",
+        link: "text-[rgb(var(--ink))] underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-5 py-2",

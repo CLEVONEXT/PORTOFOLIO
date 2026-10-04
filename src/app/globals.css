@@ -8,40 +8,92 @@
    ══════════════════════════════════════════════════ */
 @layer base {
   :root {
-    --background: 240 6% 4%;
-    --foreground: 40 12% 94%;
+    /* 60% Utama: #121212 (Matte Black) */
+    --background: 0 0% 7.1%; /* #121212 */
+    --foreground: 0 0% 100%; /* #FFFFFF */
 
-    --card: 240 6% 7%;
-    --card-foreground: 40 12% 94%;
+    /* 30% Elemen/Kartu: #1E1E1E */
+    --card: 0 0% 11.8%; /* #1E1E1E */
+    --card-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --popover: 240 8% 6%;
-    --popover-foreground: 40 12% 94%;
+    --popover: 0 0% 11.8%; /* #1E1E1E */
+    --popover-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --primary: 40 12% 94%;
-    --primary-foreground: 240 8% 6%;
+    /* Tombol Utama: #FFFFFF dengan teks #121212 */
+    --primary: 0 0% 100%; /* #FFFFFF */
+    --primary-foreground: 0 0% 7.1%; /* #121212 */
 
-    --secondary: 240 5% 13%;
-    --secondary-foreground: 40 12% 94%;
+    --secondary: 0 0% 16%; /* #292929 */
+    --secondary-foreground: 0 0% 88%; /* #E0E0E0 */
 
-    --muted: 240 5% 14%;
-    --muted-foreground: 40 6% 62%;
+    /* Teks Pendukung & Sub-judul: #E0E0E0 */
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 88%; /* #E0E0E0 */
 
-    --accent: 16 100% 62%;
-    --accent-foreground: 240 8% 6%;
+    /* Aksen 2: #FAFAFA / #CCCCCC */
+    --accent: 0 0% 98%; /* #FAFAFA */
+    --accent-foreground: 0 0% 7.1%; /* #121212 */
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 40 8% 18%;
-    --input: 240 5% 16%;
-    --ring: 16 100% 62%;
+    /* Border / Garis Pembatas: #2A2A2A / #333333 */
+    --border: 0 0% 20%; /* #333333 */
+    --input: 0 0% 18%; /* #2E2E2E */
+    --ring: 0 0% 100%; /* #FFFFFF */
 
     --radius: 0.875rem;
 
-    /* Glass tokens */
-    --glass-bg: 255 255 255 / 0.045;
-    --glass-border: 255 255 255 / 0.09;
-    --glass-highlight: 255 255 255 / 0.14;
+    /* Theme palette — dark default (#121212 base) */
+    --bg: 18 18 18;
+    --surface: 30 30 30;
+    --surface2: 38 38 38;
+    --line: 51 51 51;
+    --line-strong: 85 85 85;
+    --ink: 255 255 255;
+    --ink-dim: 224 224 224;
+    --ink-mute: 158 158 158;
+    --cta: 255 255 255;
+    --cta-fg: 18 18 18;
+  }
+
+  /* Light theme overrides */
+  .light {
+    --background: 0 0% 96%;
+    --foreground: 0 0% 7%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    --primary: 0 0% 7%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 92%;
+    --secondary-foreground: 0 0% 20%;
+
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 0 0% 7%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 0 0% 85%;
+    --input: 0 0% 88%;
+    --ring: 0 0% 7%;
+
+    --bg: 245 245 245;
+    --surface: 255 255 255;
+    --surface2: 235 235 235;
+    --line: 217 217 217;
+    --line-strong: 160 160 160;
+    --ink: 18 18 18;
+    --ink-dim: 51 51 51;
+    --ink-mute: 117 117 117;
+    --cta: 18 18 18;
+    --cta-fg: 255 255 255;
   }
 
   * {
@@ -86,76 +138,46 @@
    Utilities
    ══════════════════════════════════════════════════ */
 @layer utilities {
-  /* ── Glassmorphism ─────────────────────────────────────────────────────── */
+  /* ── Solid surfaces (theme-aware, no gradients) ───────────────────────── */
   .glass {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.07) 0%,
-      rgba(255, 255, 255, 0.028) 45%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
-    backdrop-filter: blur(22px) saturate(150%);
-    -webkit-backdrop-filter: blur(22px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    box-shadow:
-      0 8px 32px 0 rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+    background: rgb(var(--surface));
+    border: 1px solid rgb(var(--line));
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
   }
 
   .glass-strong {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.04) 50%,
-      rgba(255, 255, 255, 0.07) 100%
-    );
-    backdrop-filter: blur(34px) saturate(170%);
-    -webkit-backdrop-filter: blur(34px) saturate(170%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow:
-      0 16px 48px 0 rgba(0, 0, 0, 0.6),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+    background: rgb(var(--surface));
+    border: 1px solid rgb(var(--line-strong));
+    box-shadow: 0 8px 28px -4px rgba(0, 0, 0, 0.55);
   }
 
   .glass-subtle {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(14px) saturate(130%);
-    -webkit-backdrop-filter: blur(14px) saturate(130%);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgb(var(--surface));
+    border: 1px solid rgb(var(--line));
   }
 
-  /* Glow ring used on interactive glass surfaces */
+  /* Subtle border highlight on hover — solid, no gradient */
   .glass-glow {
     position: relative;
+    transition: border-color 0.3s ease;
   }
   .glass-glow::after {
     content: "";
     position: absolute;
     inset: -1px;
     border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      120deg,
-      rgba(255, 106, 61, 0.55),
-      rgba(124, 156, 255, 0.45),
-      rgba(255, 255, 255, 0.05)
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    border: 1px solid rgb(var(--cta));
     opacity: 0;
     transition: opacity 0.35s ease;
     pointer-events: none;
   }
   .glass-glow:hover::after {
-    opacity: 1;
+    opacity: 0.35;
   }
 
   /* ── Typography ───────────────────────────────────────────────────────── */
   .editorial-title {
-    @apply font-display tracking-[-0.03em] leading-[0.95];
+    @apply font-sans font-extrabold tracking-[-0.03em] leading-[0.95];
   }
 
   .text-balance {
@@ -167,31 +189,12 @@
   }
 
   .hairline {
-    @apply border-t border-white/[0.07];
+    @apply border-t border-border;
   }
 
-  /* ── Backgrounds ──────────────────────────────────────────────────────── */
+  /* ── Backgrounds (solid, no gradients) ───────────────────────────────── */
   .aurora-bg {
-    position: absolute;
-    inset: -30%;
-    background:
-      radial-gradient(
-        38% 42% at 22% 26%,
-        rgba(255, 106, 61, 0.22) 0%,
-        transparent 62%
-      ),
-      radial-gradient(
-        34% 40% at 78% 22%,
-        rgba(124, 156, 255, 0.18) 0%,
-        transparent 60%
-      ),
-      radial-gradient(
-        46% 46% at 52% 82%,
-        rgba(160, 120, 255, 0.14) 0%,
-        transparent 64%
-      );
-    filter: blur(72px);
-    pointer-events: none;
+    display: none;
   }
 
   .grid-lines {

@@ -83,7 +83,7 @@ export function MediaUploader({
         <span className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
           {label}
         </span>
-        <div className="flex rounded-lg border border-white/10 bg-white/[0.03] p-0.5">
+        <div className="flex rounded-lg border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-0.5">
           {(["drop", "url"] as UploadMode[]).map((option) => (
             <button
               key={option}
@@ -92,7 +92,7 @@ export function MediaUploader({
               className={cn(
                 "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[0.68rem] transition-colors",
                 mode === option
-                  ? "bg-white/[0.09] text-foreground"
+                  ? "bg-[rgb(var(--surface2))] text-foreground"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
@@ -118,8 +118,8 @@ export function MediaUploader({
           className={cn(
             "flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed px-4 py-7 text-center transition-colors",
             dragActive
-              ? "border-ember/70 bg-ember/10"
-              : "border-white/14 bg-white/[0.025] hover:border-white/25",
+              ? "border-[rgb(var(--line-strong))] bg-[rgb(var(--surface2))]"
+              : "border-[rgb(var(--line))] bg-[rgb(var(--surface))] hover:border-[rgb(var(--line-strong))]",
           )}
         >
           <input
@@ -130,7 +130,7 @@ export function MediaUploader({
             onChange={(event) => void handleFiles(event.target.files)}
           />
           {uploading ? (
-            <Loader2 className="size-5 animate-spin text-ember" />
+            <Loader2 className="size-5 animate-spin text-[rgb(var(--ink))]" />
           ) : (
             <FileUp className="size-5 text-muted-foreground" />
           )}
@@ -141,7 +141,7 @@ export function MediaUploader({
             type="button"
             onClick={() => inputRef.current?.click()}
             disabled={uploading}
-            className="rounded-full border border-white/12 bg-white/[0.05] px-3.5 py-1.5 text-[0.7rem] text-foreground transition-colors hover:border-white/25 disabled:opacity-50"
+            className="rounded-full border border-[rgb(var(--line))] bg-[rgb(var(--surface))] px-3.5 py-1.5 text-[0.7rem] text-foreground transition-colors hover:border-[rgb(var(--line))] disabled:opacity-50"
           >
             Pilih dari Explorer
           </button>
@@ -171,12 +171,12 @@ export function MediaUploader({
       )}
 
       {value ? (
-        <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-2.5">
+        <div className="flex items-center gap-3 rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={value}
             alt="Pratinjau"
-            className="size-11 rounded-lg border border-white/10 object-cover"
+            className="size-11 rounded-lg border border-[rgb(var(--line))] object-cover"
           />
           <span className="min-w-0 flex-1 truncate text-[0.7rem] text-muted-foreground">
             {value}
@@ -196,8 +196,8 @@ export function MediaUploader({
 
       {/* External-URL rule: a supporting thumbnail/logo is mandatory. */}
       {requireThumbnail && onThumbnailChange ? (
-        <div className="rounded-xl border border-ember/25 bg-ember/[0.06] p-3">
-          <p className="mb-2 text-[0.68rem] text-ember-soft">
+        <div className="rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-3">
+          <p className="mb-2 text-[0.68rem] text-[rgb(var(--ink-dim))]">
             Wajib: thumbnail/logo penerbit (Credly, Coursera, Dicoding, dll.)
           </p>
           <Input

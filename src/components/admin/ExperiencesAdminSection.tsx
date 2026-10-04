@@ -92,11 +92,11 @@ export function ExperiencesAdminSection({
       <div className="space-y-3">
         {experiences.map((item) => (
           <Panel key={item.id} className="flex items-center gap-4 p-4">
-            <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.05]">
+            <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))]">
               {item.type === "WORK" || item.type === "ORGANIZATION" ? (
-                <Users className="size-4 text-ember" />
+                <Users className="size-4 text-[rgb(var(--ink))]" />
               ) : (
-                <Route className="size-4 text-ember" />
+                <Route className="size-4 text-[rgb(var(--ink))]" />
               )}
             </span>
 
@@ -167,7 +167,7 @@ export function ExperiencesAdminSection({
               </Field>
             </div>
 
-            <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+            <div className="flex items-center justify-between rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] px-4 py-3">
               <span className="text-sm">Masih berlangsung</span>
               <Switch
                 checked={form.isCurrent}

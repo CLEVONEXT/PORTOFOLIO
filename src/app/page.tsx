@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { LeftNavbar } from "@/components/layout/LeftNavbar";
+import { Navigation } from "@/components/layout/Navigation";
 import { SplashScreen } from "@/components/layout/SplashScreen";
 import { Footer } from "@/components/layout/Footer";
 import { AboutSection } from "@/components/sections/AboutSection";
@@ -32,18 +32,12 @@ export default async function HomePage() {
     <>
       <SplashScreen />
 
-      <LeftNavbar />
+      <Navigation />
 
-      {/* Editorial page frame: left rail on desktop, top padding on mobile */}
-      <div className="relative lg:pl-[260px]">
-        {/* Fixed editorial side label */}
-        <div className="pointer-events-none fixed bottom-10 right-8 hidden xl:block">
-          <span className="eyebrow rotate-180 text-[0.58rem] [writing-mode:vertical-rl]">
-            {settings["site.major"] ?? "Software Engineering"}
-          </span>
-        </div>
-
-        <div className="mx-auto w-full max-w-[1180px] px-5 pb-20 pt-24 sm:px-8 lg:px-12 lg:pt-16">
+      {/* Centered layout: top padding clears the desktop navbar,
+          bottom padding clears the mobile bottom navbar. */}
+      <div className="pt-20 lg:pt-24">
+        <div className="mx-auto w-full max-w-[1180px] px-5 pb-28 lg:pb-16 sm:px-8 lg:px-12">
           <HeroSection
             tagline={settings["site.tagline"]}
             owner={settings["site.owner"]}

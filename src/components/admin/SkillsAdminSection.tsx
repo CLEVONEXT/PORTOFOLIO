@@ -86,7 +86,7 @@ export function SkillsAdminSection({
               <RowActions onEdit={() => startEdit(skill)} onDelete={() => remove(skill.id)} />
             </div>
 
-            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.07]">
+            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-[rgb(var(--surface2))]">
               <div
                 className="h-full rounded-full"
                 style={{
@@ -134,7 +134,7 @@ export function SkillsAdminSection({
                 max={100}
                 value={form.level}
                 onChange={(e) => setForm({ ...form, level: Number(e.target.value) })}
-                className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/[0.08] accent-[#ff6a3d]"
+                className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[rgb(var(--surface2))] accent-[rgb(var(--ink))]"
               />
             </Field>
 

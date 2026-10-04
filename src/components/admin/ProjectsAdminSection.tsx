@@ -97,7 +97,7 @@ export function ProjectsAdminSection({
       <div className="grid gap-4 lg:grid-cols-2">
         {projects.map((project) => (
           <Panel key={project.id} className="flex gap-4 p-4">
-            <div className="size-20 shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
+            <div className="size-20 shrink-0 overflow-hidden rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))]">
               {project.coverImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={project.coverImage} alt={project.title} className="size-full object-cover" />
@@ -218,7 +218,7 @@ export function ProjectsAdminSection({
               </Field>
             </div>
 
-            <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+            <div className="flex items-center justify-between rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] px-4 py-3">
               <span className="text-sm">Tampilkan sebagai Featured</span>
               <Switch
                 checked={form.featured}

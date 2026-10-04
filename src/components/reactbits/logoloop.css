@@ -1,0 +1,85 @@
+/* LogoLoop styles — solid surfaces, no gradients */
+
+.ll {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ll-track {
+  display: flex;
+  width: max-content;
+  animation: ll-scroll var(--ll-duration, 30s) linear infinite;
+}
+
+.ll.pause-on-hover .ll-track.pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
+.ll-group {
+  display: flex;
+  align-items: center;
+  gap: var(--ll-gap, 48px);
+  padding-inline: calc(var(--ll-gap, 48px) / 2);
+}
+
+.ll-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: rgb(var(--ink-mute));
+  text-decoration: none;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+}
+
+.ll-item.can-scale:hover {
+  transform: scale(1.08);
+  color: rgb(var(--ink));
+}
+
+.ll-item img {
+  width: auto;
+  object-fit: contain;
+}
+
+.ll-item span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* Edge fade — solid mask, no gradient element */
+.ll-track.fade-out {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+@keyframes ll-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(var(--ll-dir, -1) * 50%));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ll-track {
+    animation: none;
+  }
+}

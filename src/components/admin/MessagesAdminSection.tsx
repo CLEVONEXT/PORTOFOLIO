@@ -41,9 +41,9 @@ export function MessagesAdminSection({
         {messages.map((message) => (
           <Panel
             key={message.id}
-            className={cn("flex items-center gap-4 p-4", !message.read && "border-ember/25")}
+            className={cn("flex items-center gap-4 p-4", !message.read && "border-[rgb(var(--line))]")}
           >
-            <span className="grid size-10 shrink-0 place-items-center rounded-full border border-white/10 bg-white/[0.05] text-xs uppercase">
+            <span className="grid size-10 shrink-0 place-items-center rounded-full border border-[rgb(var(--line))] bg-[rgb(var(--surface))] text-xs uppercase">
               {message.name.slice(0, 2)}
             </span>
 

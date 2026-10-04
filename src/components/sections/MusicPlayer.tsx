@@ -96,14 +96,14 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
   if (!songs.length) return null;
 
   return (
-    <div className="glass glass-glow relative overflow-hidden rounded-3xl p-6 sm:p-7">
-      <div className="pointer-events-none absolute -right-16 -top-16 size-52 rounded-full bg-ember/12 blur-3xl" />
+    <div className="relative overflow-hidden rounded-3xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-6 sm:p-7">
+      <div className="pointer-events-none absolute -right-16 -top-16 size-52 rounded-full bg-[rgb(var(--surface))] blur-3xl" />
 
       {/* Header */}
       <div className="relative flex items-center justify-between gap-4">
         <div className="flex items-center gap-2.5">
-          <span className="grid size-9 place-items-center rounded-xl border border-white/10 bg-white/[0.06]">
-            <Music4 className="size-4 text-ember" />
+          <span className="grid size-9 place-items-center rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))]">
+            <Music4 className="size-4 text-[rgb(var(--ink))]" />
           </span>
           <div>
             <p className="text-sm font-medium tracking-tight">Hobi & Favorites</p>
@@ -120,7 +120,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
               <span
                 key={bar}
                 className={cn(
-                  "w-[3px] rounded-full bg-ember",
+                  "w-[3px] rounded-full bg-[rgb(var(--cta))]",
                   bar === 1 && "animate-equalize-1",
                   bar === 2 && "animate-equalize-2",
                   bar === 3 && "animate-equalize-3",
@@ -139,7 +139,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Cari judul atau penyanyi…"
           aria-label="Cari lagu"
-          className="h-10 w-full rounded-xl border border-white/10 bg-white/[0.04] pl-10 pr-10 text-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus-visible:border-ember/50 focus-visible:ring-2 focus-visible:ring-ember/20"
+          className="h-10 w-full rounded-xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))] pl-10 pr-10 text-sm outline-none transition-colors placeholder:text-[rgb(var(--ink-mute))]/70 focus-visible:border-[rgb(var(--line-strong))] focus-visible:ring-2 focus-visible:ring-[rgb(var(--ink))]/20"
         />
         {query ? (
           <button
@@ -165,7 +165,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
             className="mt-5"
           >
             <div className="flex items-center gap-4">
-              <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]">
+              <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))]">
                 {current.coverArt ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -180,7 +180,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
                   </div>
                 )}
                 {playing ? (
-                  <div className="absolute inset-0 bg-ink-950/45 backdrop-blur-[2px]" />
+                  <div className="absolute inset-0 bg-[rgb(var(--bg))]/45" />
                 ) : null}
               </div>
 
@@ -202,7 +202,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
 
             {/* Embed (Spotify / YouTube) */}
             {isEmbedMode && embedUrl ? (
-              <div className="mt-4 overflow-hidden rounded-2xl border border-white/10">
+              <div className="mt-4 overflow-hidden rounded-2xl border border-[rgb(var(--line))]">
                 <iframe
                   src={embedUrl}
                   title={`Player ${current.title}`}
@@ -228,9 +228,9 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
                   onEnded={() => skip(1)}
                   className="hidden"
                 />
-                <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-white/[0.08]">
+                <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-[rgb(var(--line))]">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-ember to-ember-soft transition-[width] duration-200"
+                    className="h-full rounded-full bg-[rgb(var(--cta))] transition-[width] duration-200"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
@@ -243,7 +243,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
                 type="button"
                 onClick={() => skip(-1)}
                 aria-label="Lagu sebelumnya"
-                className="grid size-9 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground transition-colors hover:text-foreground"
+                className="grid size-9 place-items-center rounded-full border border-[rgb(var(--line))] bg-[rgb(var(--surface2))] text-[rgb(var(--ink-mute))] transition-colors hover:text-[rgb(var(--ink))]"
               >
                 <SkipBack className="size-4" />
               </button>
@@ -251,7 +251,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
                 type="button"
                 onClick={togglePlay}
                 aria-label={playing ? "Jeda" : "Putar"}
-                className="grid size-11 place-items-center rounded-full bg-ember text-ink-950 shadow-[0_0_28px_-8px_rgba(255,106,61,0.9)] transition-transform hover:scale-105"
+                className="grid size-11 place-items-center rounded-full bg-[rgb(var(--cta))] text-[rgb(var(--cta-fg))] transition-transform hover:scale-105"
               >
                 {playing ? <Pause className="size-5" /> : <Play className="size-5 pl-0.5" />}
               </button>
@@ -259,7 +259,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
                 type="button"
                 onClick={() => skip(1)}
                 aria-label="Lagu berikutnya"
-                className="grid size-9 place-items-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground transition-colors hover:text-foreground"
+                className="grid size-9 place-items-center rounded-full border border-[rgb(var(--line))] bg-[rgb(var(--surface2))] text-[rgb(var(--ink-mute))] transition-colors hover:text-[rgb(var(--ink))]"
               >
                 <SkipForward className="size-4" />
               </button>
@@ -294,13 +294,13 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
               onClick={() => selectSong(song.id)}
               className={cn(
                 "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors duration-200",
-                isActive ? "bg-white/[0.07]" : "hover:bg-white/[0.04]",
+                isActive ? "bg-[rgb(var(--surface2))]" : "hover:bg-[rgb(var(--surface))]",
               )}
             >
               <span
                 className={cn(
                   "w-5 shrink-0 font-mono text-[0.68rem] tabular-nums",
-                  isActive ? "text-ember" : "text-muted-foreground/70",
+                  isActive ? "text-[rgb(var(--ink))]" : "text-[rgb(var(--ink-mute))]/70",
                 )}
               >
                 {String(index + 1).padStart(2, "0")}
@@ -309,7 +309,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
                 <span
                   className={cn(
                     "block truncate text-[0.82rem]",
-                    isActive ? "text-foreground" : "text-foreground/80",
+                    isActive ? "text-[rgb(var(--ink))]" : "text-[rgb(var(--ink-dim))]",
                   )}
                 >
                   {song.title}
@@ -319,7 +319,7 @@ export function MusicPlayer({ songs }: { songs: SongView[] }) {
                 </span>
               </span>
               {isActive && playing ? (
-                <span className="font-mono text-[0.62rem] uppercase tracking-widest text-ember">
+                <span className="font-mono text-[0.62rem] uppercase tracking-widest text-[rgb(var(--ink))]">
                   On air
                 </span>
               ) : (

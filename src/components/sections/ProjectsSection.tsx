@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Github, ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/field";
+import FlexCarousel from "@/components/reactbits/FlexCarousel";
 
 export type ProjectView = {
   id: string;
@@ -20,7 +21,8 @@ export type ProjectView = {
 };
 
 export function ProjectsSection({ projects }: { projects: ProjectView[] }) {
-  if (!projects.length) return null;
+  // Always render so the navbar anchor (id="projects") always exists.
+  const empty = projects.length === 0;
 
   return (
     <section id="projects" className="relative scroll-mt-24 py-20 sm:py-28">
@@ -28,7 +30,7 @@ export function ProjectsSection({ projects }: { projects: ProjectView[] }) {
         <div>
           <span className="eyebrow">02 — Projects</span>
           <h2 className="editorial-title mt-3 text-4xl font-light sm:text-5xl">
-            Daftar <span className="italic text-ember">Karya</span>
+            Daftar <span className="italic text-[rgb(var(--ink))]">Karya</span>
           </h2>
         </div>
         <p className="max-w-sm text-sm text-muted-foreground">
@@ -37,6 +39,36 @@ export function ProjectsSection({ projects }: { projects: ProjectView[] }) {
         </p>
       </header>
 
+      {empty ? (
+        <div className="mt-12">
+          <FlexCarousel
+            items={[
+              { id: "demo-1", src: "/icons/icon-512.png", caption: "Proyek demo — tambahkan lewat dashboard" },
+              { id: "demo-2", src: "/icons/icon-512.png", caption: "Proyek demo — tambahkan lewat dashboard" },
+              { id: "demo-3", src: "/icons/icon-512.png", caption: "Proyek demo — tambahkan lewat dashboard" },
+            ]}
+            fit="landscape"
+            cardHeight={0.42}
+            preset="liquid"
+            lensWidth={0.75}
+            lensHeight={0.85}
+            gap={16}
+            radius={12}
+            captions
+            focusOnClick
+          />
+          <div className="mt-6 grid place-items-center rounded-3xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-10 text-center">
+            <div>
+              <p className="text-sm text-[rgb(var(--ink-dim))]">
+                Belum ada proyek yang ditampilkan.
+              </p>
+              <p className="mt-1 text-xs text-[rgb(var(--ink-mute))]">
+                Proyek akan muncul di sini setelah ditambahkan lewat dashboard admin.
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : (
       <div className="mt-12 grid gap-6 sm:grid-cols-2">
         {projects.map((project, index) => (
           <motion.article
@@ -46,12 +78,12 @@ export function ProjectsSection({ projects }: { projects: ProjectView[] }) {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.65, delay: (index % 2) * 0.1, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
-              "glass glass-glow group relative flex flex-col overflow-hidden rounded-3xl",
+              "group relative flex flex-col overflow-hidden rounded-3xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] transition-colors duration-300 hover:border-[rgb(var(--line-strong))]",
               project.featured && "sm:col-span-2 lg:col-span-1",
             )}
           >
             {/* Cover */}
-            <div className="relative aspect-[16/10] overflow-hidden border-b border-white/[0.07] bg-white/[0.03]">
+            <div className="relative aspect-[16/10] overflow-hidden border-b border-[rgb(var(--line))] bg-[rgb(var(--surface2))]">
               {project.coverImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -66,7 +98,7 @@ export function ProjectsSection({ projects }: { projects: ProjectView[] }) {
                 </div>
               )}
 
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/70 via-transparent to-transparent opacity-70" />
+              <div className="pointer-events-none absolute inset-0 bg-[rgb(var(--bg))]/50" />
 
               <div className="absolute left-4 top-4 flex gap-2">
                 {project.category ? <Badge tone="glow">{project.category}</Badge> : null}
@@ -76,7 +108,7 @@ export function ProjectsSection({ projects }: { projects: ProjectView[] }) {
 
             {/* Body */}
             <div className="flex flex-1 flex-col p-6">
-              <h3 className="editorial-title text-xl font-light leading-snug transition-colors group-hover:text-ember">
+              <h3 className="editorial-title text-xl font-light leading-snug transition-colors group-hover:text-[rgb(var(--ink))]">
                 {project.title}
               </h3>
 
@@ -102,7 +134,7 @@ export function ProjectsSection({ projects }: { projects: ProjectView[] }) {
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-medium text-background transition-transform hover:scale-[1.03]"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-[rgb(var(--cta))] px-4 py-2 text-xs font-medium text-[rgb(var(--cta-fg))] transition-transform hover:scale-[1.03]"
                   >
                     Live Demo
                     <ArrowUpRight className="size-3.5" />
@@ -114,7 +146,7 @@ export function ProjectsSection({ projects }: { projects: ProjectView[] }) {
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/12 px-4 py-2 text-xs text-foreground/85 transition-colors hover:border-white/25 hover:text-foreground"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-[rgb(var(--line))] px-4 py-2 text-xs text-[rgb(var(--ink-dim))] transition-colors hover:border-[rgb(var(--line-strong))] hover:text-[rgb(var(--ink))]"
                   >
                     <Github className="size-3.5" />
                     Repository
@@ -125,6 +157,7 @@ export function ProjectsSection({ projects }: { projects: ProjectView[] }) {
           </motion.article>
         ))}
       </div>
+      )}
     </section>
   );
 }

@@ -40,7 +40,7 @@ export function Modal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.28 }}
-            className="absolute inset-0 bg-ink-950/80 backdrop-blur-md"
+            className="absolute inset-0 bg-[rgb(var(--bg))]/80"
             onClick={() => onOpenChange(false)}
             aria-hidden
           />
@@ -60,7 +60,7 @@ export function Modal({
             <button
               type="button"
               onClick={() => onOpenChange(false)}
-              className="absolute right-4 top-4 z-20 rounded-full border border-white/10 bg-white/[0.05] p-1.5 text-muted-foreground transition-colors hover:text-foreground"
+              className="absolute right-4 top-4 z-20 rounded-full border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-1.5 text-muted-foreground transition-colors hover:text-foreground"
               aria-label="Tutup"
             >
               <X className="size-4" />

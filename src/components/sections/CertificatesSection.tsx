@@ -23,8 +23,8 @@ export type CertificateView = {
 
 export function CertificatesSection({ certificates }: { certificates: CertificateView[] }) {
   const [selected, setSelected] = React.useState<CertificateView | null>(null);
-
-  if (!certificates.length) return null;
+  // Always render so the navbar anchor (id="certificates") always exists.
+  const empty = certificates.length === 0;
 
   return (
     <section id="certificates" className="relative scroll-mt-24 py-20 sm:py-28">
@@ -32,7 +32,7 @@ export function CertificatesSection({ certificates }: { certificates: Certificat
         <div>
           <span className="eyebrow">04 — Certificates</span>
           <h2 className="editorial-title mt-3 text-4xl font-light sm:text-5xl">
-            Sertifikat & <span className="italic text-ember">Pencapaian</span>
+            Sertifikat & <span className="italic text-[rgb(var(--ink))]">Pencapaian</span>
           </h2>
         </div>
         <p className="max-w-sm text-sm text-muted-foreground">
@@ -41,6 +41,16 @@ export function CertificatesSection({ certificates }: { certificates: Certificat
         </p>
       </header>
 
+      {empty ? (
+        <div className="mt-12 grid place-items-center rounded-3xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-14 text-center">
+          <div>
+            <p className="text-sm text-[rgb(var(--ink-dim))]">Belum ada sertifikat yang ditampilkan.</p>
+            <p className="mt-1 text-xs text-[rgb(var(--ink-mute))]">
+              Sertifikat akan muncul di sini setelah ditambahkan lewat dashboard admin.
+            </p>
+          </div>
+        </div>
+      ) : (
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {certificates.map((certificate, index) => {
           const preview = certificate.thumbnailUrl || certificate.fileUrl;
@@ -53,9 +63,9 @@ export function CertificatesSection({ certificates }: { certificates: Certificat
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.6, delay: (index % 3) * 0.08 }}
-              className="glass glass-glow group relative flex flex-col overflow-hidden rounded-3xl p-5 text-left"
+              className="group relative flex flex-col overflow-hidden rounded-3xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-5 text-left transition-colors duration-300 hover:border-[rgb(var(--line-strong))]"
             >
-              <div className="relative mb-5 aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+              <div className="relative mb-5 aspect-[4/3] overflow-hidden rounded-2xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))]">
                 {preview ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -87,14 +97,14 @@ export function CertificatesSection({ certificates }: { certificates: Certificat
                     loading="lazy"
                   />
                 ) : (
-                  <BadgeCheck className="size-4 text-ember" />
+                  <BadgeCheck className="size-4 text-[rgb(var(--ink))]" />
                 )}
                 <span className="text-[0.7rem] uppercase tracking-[0.16em] text-muted-foreground">
                   {certificate.issuer}
                 </span>
               </div>
 
-              <h3 className="mt-2 text-base font-medium leading-snug tracking-tight transition-colors group-hover:text-ember">
+              <h3 className="mt-2 text-base font-medium leading-snug tracking-tight transition-colors group-hover:text-[rgb(var(--ink))]">
                 {certificate.title}
               </h3>
 
@@ -105,6 +115,7 @@ export function CertificatesSection({ certificates }: { certificates: Certificat
           );
         })}
       </div>
+      )}
 
       {/* Preview modal */}
       <Modal
@@ -115,7 +126,7 @@ export function CertificatesSection({ certificates }: { certificates: Certificat
       >
         {selected ? (
           <div className="p-6 sm:p-8">
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+            <div className="overflow-hidden rounded-2xl border border-[rgb(var(--line))] bg-[rgb(var(--surface2))]">
               {selected.fileUrl || selected.thumbnailUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
