@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Home, User, FolderCode, Cpu, Award, Mail } from "lucide-react";
 import { NAV_ITEMS, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 const NAV_ICONS: Record<string, React.ElementType> = {
   home: Home,
@@ -24,9 +23,6 @@ const NAV_ICONS: Record<string, React.ElementType> = {
  */
 export function Navigation() {
   const [active, setActive] = React.useState<string>("home");
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => setMounted(true), []);
 
   React.useEffect(() => {
     const sections = NAV_ITEMS.map((item) => document.getElementById(item.id)).filter(
@@ -46,7 +42,7 @@ export function Navigation() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [mounted]);
+  }, []);
 
   const scrollTo = React.useCallback((id: string) => {
     const element = document.getElementById(id);
@@ -63,7 +59,7 @@ export function Navigation() {
     <>
       {/* ── Desktop: top navbar ─────────────────────────────────────────── */}
       <header className="fixed inset-x-0 top-0 z-40 hidden lg:block">
-        <div className="mx-auto flex max-w-[1180px] items-center justify-between px-8 py-4">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
           <button
             type="button"
             onClick={() => scrollTo("home")}
@@ -104,23 +100,18 @@ export function Navigation() {
             <span className="text-[0.68rem] uppercase tracking-[0.28em] text-[rgb(var(--ink-mute))]">
               {SITE.major}
             </span>
-            {mounted ? <ThemeToggle /> : null}
           </div>
         </div>
       </header>
 
-      {/* ── Mobile: floating theme switch + bottom navbar ─────────────── */}
-      <div className="fixed right-4 top-4 z-40 lg:hidden">
-        {mounted ? <ThemeToggle /> : null}
-      </div>
-
+      {/* ── Mobile: floating bottom navigation ────────────────────────── */}
       <nav
         aria-label="Navigasi utama"
-        className="fixed inset-x-0 bottom-0 z-40 lg:hidden"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        className="fixed inset-x-0 bottom-0 z-40 px-3 lg:hidden"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 0.75rem)" }}
       >
-        <div className="border-t border-[rgb(var(--line))] bg-[rgb(var(--bg))]">
-          <div className="mx-auto grid max-w-md grid-cols-6">
+        <div className="mx-auto max-w-md rounded-2xl border border-[rgb(var(--line))] bg-[rgb(var(--surface))] p-2 shadow-[0_8px_32px_rgba(0,0,0,0.45)]">
+          <div className="grid grid-cols-6 gap-1">
             {NAV_ITEMS.map((item) => {
               const Icon = NAV_ICONS[item.id] ?? Home;
               const isActive = active === item.id;
@@ -129,30 +120,31 @@ export function Navigation() {
                   key={item.id}
                   type="button"
                   aria-label={item.hint}
+                  aria-current={isActive ? "page" : undefined}
                   onClick={() => scrollTo(item.id)}
-                  className="relative flex flex-col items-center gap-1 px-1 py-2.5"
+                  className={cn(
+                    "flex min-w-0 flex-col items-center gap-1 rounded-xl px-0.5 py-1.5 text-[0.5rem] leading-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--ink))]",
+                    isActive ? "text-[rgb(var(--ink))]" : "text-[rgb(var(--ink-mute))]",
+                  )}
                 >
-                  {isActive ? (
-                    <motion.span
-                      layoutId="bottom-nav-indicator"
-                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      className="absolute inset-x-2 top-0 h-[2px] rounded-full bg-[rgb(var(--ink))]"
+                  <span className="relative grid size-8 place-items-center">
+                    {isActive ? (
+                      <motion.span
+                        layoutId="bottom-nav-indicator"
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        className="absolute inset-0 rounded-xl bg-[rgb(var(--cta))]"
+                      />
+                    ) : null}
+                    <Icon
+                      className={cn(
+                        "relative z-10 size-[18px] transition-colors duration-300",
+                        isActive ? "text-[rgb(var(--cta-fg))]" : "text-[rgb(var(--ink-mute))]",
+                      )}
+                      strokeWidth={isActive ? 2.4 : 1.8}
                     />
-                  ) : null}
-                  <Icon
-                    className={cn(
-                      "size-5 transition-colors duration-300",
-                      isActive ? "text-[rgb(var(--ink))]" : "text-[rgb(var(--ink-mute))]",
-                    )}
-                    strokeWidth={isActive ? 2.4 : 1.8}
-                  />
-                  <span
-                    className={cn(
-                      "text-[0.55rem] leading-none transition-colors duration-300",
-                      isActive ? "text-[rgb(var(--ink))]" : "text-[rgb(var(--ink-mute))]",
-                    )}
-                  >
-                    {item.label}
+                  </span>
+                  <span className="max-w-full truncate">
+                    {item.id === "certificates" ? "Certs" : item.label}
                   </span>
                 </button>
               );
