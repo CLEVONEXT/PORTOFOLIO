@@ -41,7 +41,40 @@ export async function loginAction(
     if ((error as { digest?: string })?.digest?.startsWith("NEXT_REDIRECT")) {
       throw error;
     }
-    return { ok: false, message: "Email atau password salah." };
+
+    // Distinguish real server/configuration errors from wrong credentials.
+    const type = (error as { type?: string })?.type ?? "";
+    const message = (error as Error)?.message ?? "";
+
+    if (type === "CredentialsSignin") {
+      // Wrong email or password — or the admin account is not in the database.
+      return {
+        ok: false,
+        message:
+          "Email atau password salah. Jika yakin sandi benar, pastikan akun admin sudah dibuat di database (npm run db:seed).",
+      };
+    }
+
+    if (/Can't reach database|PrismaClientInitializationError|PrismaClientKnownRequestError|connection/i.test(message)) {
+      return {
+        ok: false,
+        message: "Database tidak dapat dihubungi. Periksa DATABASE_URL di environment deployment.",
+      };
+    }
+
+    if (/Configuration|MissingSecret|secret/i.test(message)) {
+      return {
+        ok: false,
+        message: "Konfigurasi server salah. Set AUTH_SECRET di environment deployment.",
+      };
+    }
+
+    // Unknown error — show generic message plus the underlying error type so
+    // debugging is possible without reading server logs.
+    return {
+      ok: false,
+      message: `Gagal masuk. (${message.slice(0, 120) || type || "error tidak diketahui"})`,
+    };
   }
 }
 
