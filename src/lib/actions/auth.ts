@@ -1,6 +1,7 @@
 "use server";
 
 import { signIn, signOut } from "@/lib/auth";
+import { authSecret } from "@/lib/auth.config";
 import { loginSchema } from "@/lib/validations";
 
 export type LoginState = {
@@ -12,6 +13,10 @@ export async function loginAction(
   _prev: LoginState | null,
   formData: FormData,
 ): Promise<LoginState> {
+  if (!authSecret) {
+    return { ok: false, message: "Autentikasi belum dikonfigurasi. Hubungi administrator." };
+  }
+
   const parsed = loginSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -41,5 +46,6 @@ export async function loginAction(
 }
 
 export async function logoutAction(): Promise<void> {
+  if (!authSecret) return;
   await signOut({ redirectTo: "/" });
 }

@@ -59,9 +59,8 @@ export function HeroSection({
             fontSize={48}
             flipDuration={0.1}
             flipsPerChar={10}
-            className="!text-[clamp(0.625rem,3.6vw,3rem)]"
-            tileColor="#18181b"
-            textColor="#ffffff"
+            tileColor="#1e293b"
+            textColor="#38bdf8"
             tileRadius={8}
             gap={6}
           />

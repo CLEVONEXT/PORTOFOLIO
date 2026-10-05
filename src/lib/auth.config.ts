@@ -1,10 +1,18 @@
 import type { NextAuthConfig } from "next-auth";
 
+const developmentSecret = "clevonext-local-only-secret-not-for-production";
+
+export const authSecret =
+  process.env.NEXTAUTH_SECRET ||
+  process.env.AUTH_SECRET ||
+  (process.env.NODE_ENV === "production" ? undefined : developmentSecret);
+
 /**
  * Edge-safe subset of the Auth.js config.
  * Used by `middleware.ts` (Edge runtime) which cannot import Prisma/bcrypt.
  */
 export const authConfig = {
+  secret: authSecret,
   pages: {
     signIn: "/admin/login",
   },

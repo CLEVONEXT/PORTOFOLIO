@@ -27,7 +27,7 @@ export function CertificatesSection({ certificates }: { certificates: Certificat
   const empty = certificates.length === 0;
 
   return (
-    <section id="certificates" className="relative scroll-mt-24">
+    <section id="certificates" className="relative scroll-mt-24 py-20 sm:py-28">
       <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <span className="eyebrow">04 — Certificates</span>

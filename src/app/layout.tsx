@@ -45,18 +45,29 @@ export const metadata: Metadata = {
     url: SITE.url,
     siteName: SITE.brand,
     locale: "id_ID",
+    images: [
+      {
+        url: "/og-image.jpeg",
+        width: 1200,
+        height: 630,
+        alt: `${SITE.brand} — ${SITE.owner}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.brand} — ${SITE.owner}`,
     description: "Editorial portfolio of a software engineering student.",
+    images: ["/og-image.jpeg"],
   },
   icons: {
     icon: [
+      { url: "/favicon.jpeg", type: "image/jpeg", sizes: "any" },
       { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
       { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [{ url: "/icons/icon-192.png", sizes: "192x192" }],
+    shortcut: [{ url: "/favicon.jpeg", type: "image/jpeg", sizes: "any" }],
+    apple: [{ url: "/apple-touch-icon.jpeg", sizes: "180x180" }],
   },
   robots: { index: true, follow: true },
 };

@@ -3,8 +3,8 @@
 import * as React from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { NAV_ITEMS, SITE } from "../../lib/constants";
-import { cn } from "../../lib/utils";
+import { NAV_ITEMS, SITE } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 /**
  * Vertical left navbar (desktop) / slide-in drawer (mobile).

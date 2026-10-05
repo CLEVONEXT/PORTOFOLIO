@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowLeft, Lock } from "lucide-react";
 import { auth } from "@/lib/auth";
+import { authSecret } from "@/lib/auth.config";
 import { LoginForm } from "@/components/admin/LoginForm";
 
 export const metadata = {
@@ -10,7 +11,7 @@ export const metadata = {
 };
 
 export default async function AdminLoginPage() {
-  const session = await auth();
+  const session = authSecret ? await auth() : null;
   if (session?.user) redirect("/admin");
 
   return (
@@ -36,7 +37,13 @@ export default async function AdminLoginPage() {
           </div>
         </div>
 
-        <LoginForm />
+        {authSecret ? (
+          <LoginForm />
+        ) : (
+          <p role="alert" className="mt-6 rounded-xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-200">
+            Login admin sementara tidak tersedia. Atur NEXTAUTH_SECRET atau AUTH_SECRET di environment deployment.
+          </p>
+        )}
 
         <Link
           href="/"

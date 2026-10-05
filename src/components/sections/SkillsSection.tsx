@@ -32,7 +32,7 @@ export function SkillsSection({ skills }: { skills: SkillView[] }) {
   const empty = skills.length === 0;
 
   return (
-    <section id="skills" className="relative scroll-mt-24">
+    <section id="skills" className="relative scroll-mt-24 py-20 sm:py-28">
       <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <span className="eyebrow">03 — Skills</span>

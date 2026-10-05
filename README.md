@@ -164,11 +164,13 @@ Lihat `.env.example`. Yang paling penting:
 
 | Variable                                      | Kegunaan                                            |
 | --------------------------------------------- | --------------------------------------------------- |
-| `DATABASE_URL` / `DIRECT_URL`                 | Vercel Postgres / Supabase                          |
+| `DATABASE_URL` / `DATABASE_URL_UNPOOLED`       | Neon pooled runtime / direct Prisma schema sync     |
 | `AUTH_SECRET`                                 | Session signing (`openssl rand -base64 32`)         |
 | `BLOB_READ_WRITE_TOKEN`                       | Vercel Blob (kosongkan → fallback `public/uploads`) |
 | `RESEND_API_KEY` + `CONTACT_TO_EMAIL`         | Contact form ke Gmail                               |
 | `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` | Pencarian lagu di admin panel                       |
+
+Untuk deployment Vercel dengan Neon, isi `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, dan `AUTH_SECRET` pada Environment Variables (Production, Preview bila diperlukan, dan Development bila dipakai). `vercel.json` menjalankan `npm run build:vercel`, yang menerapkan schema Prisma dengan `db push` sebelum build Next.js. Tabel akan dibuat mengikuti `prisma/schema.prisma`; tinjau perubahan schema sebelum deploy karena `db push` menyelaraskan database langsung dan bukan pengganti migration history.
 
 ---
 

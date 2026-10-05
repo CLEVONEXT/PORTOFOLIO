@@ -262,7 +262,24 @@ export function AboutSection({
 
         {/* Card + playlist column */}
         <div className="order-1 flex flex-col gap-8 lg:order-2">
-          <ProfileCard photo={photo} name={name} major={major} />
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+            <ProfileCard photo={photo} name={name} major={major} />
+            <aside className="sm:max-w-[220px]">
+              <h3 className="eyebrow">Sekolah</h3>
+              <p className="mt-3 text-sm font-medium leading-snug text-[rgb(var(--ink))]">
+                SMK Krian 1 Sidoarjo
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Jurusan Software Engineering
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Saya bersekolah di SMK Krian 1 Sidoarjo, mengambil jurusan
+                Software Engineering. Di sini saya belajar membangun aplikasi
+                modern — mulai dari desain antarmuka, pengembangan frontend &amp;
+                backend, hingga praktik kerja proyek nyata.
+              </p>
+            </aside>
+          </div>
           <MusicPlayer songs={songs} />
         </div>
       </div>
